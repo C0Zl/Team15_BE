@@ -2,26 +2,28 @@ package com.kakao.borrowme.coin;
 
 import com.kakao.borrowme.user.User;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class CoinService {
     private final CoinJPARepository coinJPARepository;
 
     public CoinResponse.FindByIdDTO getUserCoin() {
-        System.out.println("getUserCoin 호출 완료");
+        log.info("getUserCoin 호출 완료");
         Optional<Coin> coinOP = coinJPARepository.findByUserId(1L);
 
         if (coinOP.isPresent()) {
             Coin coin = coinOP.get();
-            System.out.println("1번호출");
+            log.info("1번 호출 완료");
             return new CoinResponse.FindByIdDTO(coin);
         } else {
-            System.out.println("코인 정보가 없습니다.");
-            System.out.println("2번호출");
+            log.error("없음");
+            log.info("2번 호출 완료");
             return null;
         }
     }
