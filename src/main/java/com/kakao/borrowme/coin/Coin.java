@@ -20,7 +20,7 @@ public class Coin {
     @Column(name = "coin_pk")
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_pk")
     private User user;
 
